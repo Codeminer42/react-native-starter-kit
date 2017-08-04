@@ -5,11 +5,31 @@
 > We recommend using [NVM](https://github.com/creationix/nvm).
 
 #### [Java Development Kit](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+Extract the downloaded file into ```/usr/lib/jvm/```
+```
+sudo tar xzf <downloaded file> /usr/lib/jvm/
+```
+Or use the apt-get command to install:
+```
+sudo apt-get install openjdk-8-jdk
+```
+```
+apt-cache search jdk
+```
+Then add the environment variables
 
+> Make sure to set the correct path depending on the version you have just installed.
+
+```sh
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+```
+```sh
+export PATH=$PATH:/usr/lib/jvm/java-8-openjdk-amd64/bin
+```
 #### [Android SDK](https://developer.android.com/studio/index.html)
 > Command line tool required only.
 
-- extract the downloaded file to ```~/android```
+- Download and extract the SDK tools to ```~/android```
 - Add the ANDROID_HOME environment variable:
 ```sh
 echo "export ANDROID_HOME=~/android" >> ~/.bashrc &&
