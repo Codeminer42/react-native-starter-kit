@@ -1,42 +1,42 @@
 # React Native Setup on Ubuntu
 
-## Prerequisites:
-#### [Node.js](https://nodejs.org/en/download/)
-> We recommend using [NVM](https://github.com/creationix/nvm).
+### 1. Prerequisites:
+------
+##### 1.1. Node.js
+------
+ We recommend using [NVM](https://github.com/creationix/nvm).
 
-#### [Java Development Kit](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
-Extract the downloaded file into ```/usr/lib/jvm/```
+##### 1.2. Java Development Kit
+------
+###### Installation
+* Option 1: [Download](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) and extract the files into ```/usr/lib/jvm/```:
 ```
 sudo tar xzf <downloaded file> /usr/lib/jvm/
 ```
-Or use the apt-get command to install:
+* Option 2: Or use the apt-get command to install it:
 ```
-sudo apt-get install openjdk-8-jdk
+sudo apt-get install openjdk-8-jdk && apt-cache search jdk
 ```
-```
-apt-cache search jdk
-```
-Then add the environment variables
-
+###### Setup
+Add the environment variables:
 > Make sure to set the correct path depending on the version you have just installed.
-
 ```sh
-export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
-```
-```sh
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64 &&
 export PATH=$PATH:/usr/lib/jvm/java-8-openjdk-amd64/bin
 ```
-#### [Android SDK](https://developer.android.com/studio/index.html)
+##### 1.3. Android SDK
+------
 > Command line tool required only.
-
-- Download and extract the SDK tools to ```~/android```
+###### Installation
+- [Download](https://developer.android.com/studio/index.html) and extract the SDK tools to ```~/android```
+###### Setup
 - Add the ANDROID_HOME environment variable:
 ```sh
 echo "export ANDROID_HOME=~/android" >> ~/.bashrc &&
 echo "export PATH=$PATH:$ANDROID_HOME/tools" >> ~/.bashrc &&
 echo "export PATH=$PATH:$ANDROID_HOME/platforms"  >> ~/.bashrc
 ```
-- Download the SDK necessary packages
+- Download the minimum SDK necessary packages
   - Android 6.0 (Marshmallow) SDK Platform 23
   - Google APIs 23
   - Build-tools 23
@@ -48,20 +48,24 @@ echo "export PATH=$PATH:$ANDROID_HOME/platforms"  >> ~/.bashrc
 ```
 sudo apt-get install android-tools-adb
 ```
-
-## Installation:
+To setup and run an Android Virtual Device see [How To Setup AVD](docs/AVD-setup-ubuntu).
+### 2. Installation:
+------
 ```
 sudo npm install -g react-native-cli
 ```
 > You can also use yarn.
-## Initialization:
+### 3. Initialization:
+------
 ```
-react-native init MyFirstProject
+react-native init MyProjectName
 ```
-## Running:
+### 4. Running:
+------
 Connect your Android device in debug mode and run:
 ```
 react-native run-android
 ```
-## Releasing:
+### 5. Releasing:
+------
 Follow the [documentation](https://facebook.github.io/react-native/docs/signed-apk-android.html) steps.
