@@ -23,7 +23,7 @@ function common_images {
   echo 'system-images;android-24;google_apis_playstore;x86'
   echo 'system-images;android-26;google_apis_playstore;x86'
   echo
-  echo 'To list all avaliable system images: use the "packages" command.'
+  echo 'To list all available system images: use the "packages" command.'
   echo
 }
 
@@ -35,7 +35,7 @@ function common_devices {
   echo 'Nexus One'
   echo 'pixel_xl'
   echo
-  echo 'To list all avaliable devices: use the "devices" command.'
+  echo 'To list all available devices: use the "devices" command.'
   echo
 }
 
@@ -79,7 +79,7 @@ function create {
 
     if [[ $VALID == 'y' ]]; then
       echo
-      echo 'Creating Android Virtual Divice...'
+      echo 'Creating Android Virtual Device...'
 
       $ANDROID_TOOLS/bin/avdmanager create avd --name "$avd_name" --package "$avd_system_image_path" --device "$avd_device"
       add_skin $avd_name $avd_device
