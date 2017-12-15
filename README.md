@@ -1,49 +1,95 @@
 # React native starter kit
 
-1. Setup your machine.
-- [Ubuntu setup](docs/ubuntu-setup.md)
-- [Mac OS](https://facebook.github.io/react-native/docs/getting-started.html) - Select the option Building Projects with Native Code.
-- We highly recommend to use [Yarn](https://yarnpkg.com/en/docs/install).
+## Installation
 
-2. Start the project.
+### Set up your machine
+- [Ubuntu](docs/os-setup/ubuntu.md)
+- [Mac OS](docs/os-setup/mac.md)
+
+### Project configuration
 ```
-git clone git@github.com:Codeminer42/react-native-starter-kit.git yourProject
-react-native init yourProject (Type y if any prompt appears)
-cd yourProject
+git clone https://github.com/Codeminer42/react-native-starter-kit.git yourProjectName
+cd yourProjectName
+```
+Now you need to rename ***react-native-starter-kit*** in `package.json` and `index.js` to ***yourProjectName***.
+
+### Build project
+```
+yarn
+yarn build
 rm -rf .git
 ```
+That's it!
 
-3. Install the packages.
-
-`yarn add react-native-router-flux react-redux redux redux-thunk`
-
-`yarn add eslint eslint-plugin-react eslint-plugin-react-native --dev`
-
-4. Override the scripts.
-
+### Run
 ```
-  "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest",
-    "coverage": "jest --coverage --silent && open coverage/lcov-report/index.html",
-    "coverage:open": "open coverage/lcov-report/index.html",
-    "android": "react-native run-android",
-    "ios": "react-native run-ios",
-    "release:android": "cd android && ./gradlew assembleRelease",
-    "open:android:release": "open android/app/build/outputs/apk",
-    "lint": "eslint -c .eslintrc . --ignore-path .eslintignore",
-    "lint:fix": "eslint -c .eslintrc . --ignore-path .eslintignore --fix"
-  },
+yarn ios or yarn android
 ```
 
-5. Override your `index.ios.js` and `index.android.js` files.
+## How we organize the source code
+
+We have a source folder called `src`, which contains all of our app Javascript code and assets. That's the structure:
 
 ```
-import { AppRegistry } from 'react-native'
-
-import yourProject from './src/app'
-
-AppRegistry.registerComponent('yourProject', () => yourProject)
+|-- src/
+|---- api /
+|---- assets /
+|---- components /
+|---- constants /
+|---- presenters /
+|---- scenes /
+|---- services /
+|---- store /
+|---- styles /
 ```
 
-6. Run `yarn ios` or `yarn android`.
+- `api`: hold all API communication logic here;
+- `assets`: hold all of our assets related files. It can be images, sounds, whatever related;
+- `components`: known as "dumb components";
+- `constants`: constants help us to eliminate pure strings values, embracing DRY;
+- `presenters`: if you need to change a value for presenting it in another way, presenters are where you need to put these kinds of functions;
+- `scenes`: hold our "screens", every scene represents a screen on the app. It is known as "smart component";
+- `services`: they are responsible for the business rules as to manipulate values that come from API, you shouldn't parse values from API in your component, use services instead;
+- `stores`: our "redux" logic files. It manages the state and the data flow throughout our app;
+- `styles`: anything related to styles, e.g colors and spacing;
+
+## Testing
+```
+yarn test
+```
+
+Tests files must be placed inside a `__test__` folder in the same level as the file to be tested.
+```
+|-- src/
+|---- components /
+|------ __tests__/
+|-------- button.js
+|------ button.js
+```
+
+## Style Guide
+
+We're following this style guide: [docs/style-guide.md](docs/style-guide.md)
+
+## Release
+### Android
+Follow the official guide to generate the release key: https://facebook.github.io/react-native/docs/signed-apk-android.html.
+To set up the Gradle Variables create the `~android/.gradle/gradle.properties` file with the following variables:
+
+```
+APP_RELEASE_STORE_FILE=app-release-key.keystore
+APP_RELEASE_KEY_ALIAS=app-key-alias
+APP_RELEASE_STORE_PASSWORD=***
+APP_RELEASE_KEY_PASSWORD=***
+```
+
+### iOS
+There is a good blog post about that, where you will find everything about deploy and TestFlight process. Check it out: https://www.raywenderlich.com/127936/submit-an-app-part-1
+
+## Utils and other docs
+- [Change app icon](docs/app-icon.md)
+- [Change app name](docs/change-app-name.md)
+- [Disable app rotation](docs/disable-app-rotation.md)
+- [Fonts configuration](docs/fonts.md)
+- [Splash screen](docs/splash-screen.md)
+- [Style guide](docs/style-guide.md)

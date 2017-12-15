@@ -1,0 +1,10 @@
+export const zIndex1  =  100
+export const zIndex2  =  200
+export const zIndex3  =  300
+export const zIndex4  =  400
+export const zIndex5  =  500
+export const zIndex6  =  600
+export const zIndex7  =  700
+export const zIndex8  =  800
+export const zIndex9  =  900
+export const zIndex10 = 1000

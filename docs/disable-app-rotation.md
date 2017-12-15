@@ -1,4 +1,4 @@
-# Disable app rotation setup
+# Disable app rotation
 
 This configuration will disable your app rotation over all screens for both the landscape and upside down modes. If you are looking for a way to manage the screens using a different approach, check out [react-native-rotation](https://github.com/yamill/react-native-orientation).
 

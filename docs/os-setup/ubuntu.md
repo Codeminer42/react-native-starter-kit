@@ -48,7 +48,7 @@ echo "export PATH=$PATH:$ANDROID_HOME/platforms"  >> ~/.bashrc
 ```
 sudo apt-get install android-tools-adb
 ```
-To set up and run an Android Virtual Device see [How to set up AVD](docs/AVD-setup-ubuntu).
+To set up and run an Android Virtual Device see [How to set up AVD](../avd-setup.md).
 ### 2. Installation:
 ------
 ```

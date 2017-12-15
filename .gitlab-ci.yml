@@ -1,0 +1,9 @@
+before_script:
+  - npm install -g yarn
+  - yarn install
+
+test:
+  script: yarn test
+
+lint:
+  script: yarn lint

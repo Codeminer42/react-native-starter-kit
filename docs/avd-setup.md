@@ -1,5 +1,5 @@
 # Android Virtual Device on Ubuntu
-To simplify your work we created a [AVD helper using shell script](docs/avd-helper). Try it out.    
+To simplify your work we created a [AVD helper using shell script](avd). Try it out.
 ### 1. Prerequisites:
 ------
 ##### 1.1. Android emulator:

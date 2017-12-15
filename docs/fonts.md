@@ -1,4 +1,4 @@
-# Fonts setup
+# Fonts
 
 React Native supports TTF and OTF fonts extensions.
 
