@@ -1,7 +1,7 @@
 # React native starter kit
 
 1. Setup your machine.
-- [Ubuntu setup](ubuntu-setup.md)
+- [Ubuntu setup](docs/ubuntu-setup.md)
 - [Mac OS](https://facebook.github.io/react-native/docs/getting-started.html) - Select the option Building Projects with Native Code.
 - We highly recommend to use [Yarn](https://yarnpkg.com/en/docs/install).
 

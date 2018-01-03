@@ -1,0 +1,164 @@
+#!/bin/bash
+
+ANDROID_PATH=$ANDROID_HOME
+ANDROID_TOOLS="$ANDROID_PATH/tools"
+ANDROID_EMULATOR="$ANDROID_PATH/emulator"
+ANDROID_SKINS="$ANDROID_PATH/skins"
+
+function add_skin {
+  SKIN_NAME_UNDERSCORED=`tr -s ' ' '_' <<< $avd_device`
+  SKIN_NAME=`tr '[:upper:]' '[:lower:]' <<< $SKIN_NAME_UNDERSCORED`
+
+  echo "showDeviceFrame=yes" >> ~/.android/avd/"$avd_name".avd/config.ini &&
+  echo "skin.dynamic=yes" >> ~/.android/avd/"$avd_name".avd/config.ini &&
+  echo "skin.name=$SKIN_NAME" >> ~/.android/avd/"$avd_name".avd/config.ini &&
+  echo "skin.path=$ANDROID_SKINS/$SKIN_NAME" >> ~/.android/avd/"$avd_name".avd/config.ini
+}
+
+function common_images {
+  echo 'Most common system images:'
+  echo 'system-images;android-21;google_apis;x86'
+  echo 'system-images;android-22;google_apis;x86'
+  echo 'system-images;android-23;google_apis;x86'
+  echo 'system-images;android-24;google_apis_playstore;x86'
+  echo 'system-images;android-26;google_apis_playstore;x86'
+  echo
+  echo 'To list all available system images: use the "packages" command.'
+  echo
+}
+
+function common_devices {
+  echo 'Most common devices:'
+  echo 'Nexus S'
+  echo 'Nexus 5'
+  echo 'Nexus 5X'
+  echo 'Nexus One'
+  echo 'pixel_xl'
+  echo
+  echo 'To list all available devices: use the "devices" command.'
+  echo
+}
+
+function usage {
+  echo
+  echo 'Valid commands:'
+  echo 'create'
+  echo 'delete'
+  echo 'devices'
+  echo 'list'
+  echo 'packages'
+  echo 'setup'
+  echo 'start'
+}
+
+function create {
+  VALID='n'
+
+  while [[ $VALID != 'y' ]]; do
+    echo 'Enter AVD name:'
+    read avd_name
+    echo
+
+    common_devices
+
+    echo 'Enter desired device:'
+    read avd_device
+    echo
+
+    common_images
+
+    echo 'Enter desired system image path:'
+    read avd_system_image_path
+    echo
+
+    echo "Name: $avd_name"
+    echo "Device: $avd_device"
+    echo "System Image Path: $avd_system_image_path"
+    echo 'Is it correct?[y/n]'
+    read VALID
+
+    if [[ $VALID == 'y' ]]; then
+      echo
+      echo 'Creating Android Virtual Device...'
+
+      $ANDROID_TOOLS/bin/avdmanager create avd --name "$avd_name" --package "$avd_system_image_path" --device "$avd_device"
+      add_skin $avd_name $avd_device
+
+      VALID='y'
+    fi
+  done
+}
+
+function list {
+  $ANDROID_TOOLS/bin/avdmanager list avd
+}
+
+function setup {
+  echo 'Installing emulator...'
+  $ANDROID_TOOLS/bin/sdkmanager 'emulator'
+  echo
+  echo 'Do you want to install any system image?[y/n]'
+  read system_image_bool
+
+  while [[ $system_image_bool == 'y' ]]; do
+    common_images
+    echo 'Enter system image path:'
+    read system_image_path
+
+    $ANDROID_TOOLS/bin/sdkmanager "$system_image_path"
+
+    echo 'Do you want to install any other system image?[y/n]'
+    read system_image_bool
+    echo
+  done
+}
+
+function packages {
+  $ANDROID_TOOLS/bin/sdkmanager --list --verbose
+}
+
+function start {
+  $ANDROID_EMULATOR/emulator -list-avds | cat -n
+  echo "Select AVD to start: "
+  read index
+
+  AVD=`"$ANDROID_EMULATOR"/emulator -list-avds | sed "${index}q;d"`
+  $ANDROID_EMULATOR/emulator -avd $AVD
+}
+
+function delete {
+  $ANDROID_EMULATOR/emulator -list-avds | cat -n
+  echo "Select AVD to delete: "
+  read index
+
+  echo 'Are you sure?(y/n)'
+  read sure
+  if [[ $sure == 'y' ]]; then
+    AVD=`"$ANDROID_EMULATOR"/emulator -list-avds | sed "${index}q;d"`
+    $ANDROID_TOOLS/bin/avdmanager delete avd -n $AVD
+  fi
+}
+
+case $1 in
+  'create')
+    create
+  ;;
+  'list')
+    list
+  ;;
+  'setup')
+    setup
+  ;;
+  'packages')
+    packages
+  ;;
+  'delete')
+    delete
+  ;;
+  'start')
+    start
+  ;;
+  *)
+    usage
+  ;;
+esac
