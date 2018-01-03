@@ -1,0 +1,40 @@
+{
+  "name": "react-native-starter-kit",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest --silent",
+    "build": "react-native upgrade",
+    "coverage": "jest --coverage --silent && open coverage/lcov-report/index.html",
+    "coverage:open": "open coverage/lcov-report/index.html",
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "release:android": "cd android && ./gradlew assembleRelease",
+    "open:android:release": "open android/app/build/outputs/apk",
+    "lint": "eslint -c .eslintrc . --ignore-path .eslintignore",
+    "lint:fix": "eslint -c .eslintrc . --ignore-path .eslintignore --fix"
+  },
+  "dependencies": {
+    "react": "16.0.0",
+    "react-native": "0.51.0",
+    "react-native-router-flux": "^4.0.0-beta.24",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.0.3",
+    "babel-jest": "21.2.0",
+    "babel-preset-react-native": "4.0.0",
+    "eslint": "^4.13.1",
+    "eslint-plugin-react": "^7.5.1",
+    "eslint-plugin-react-native": "^3.2.0",
+    "jest": "21.2.1",
+    "react-native-cli": "^2.0.1",
+    "react-test-renderer": "16.0.0"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}

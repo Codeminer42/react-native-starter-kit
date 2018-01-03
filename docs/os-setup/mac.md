@@ -27,17 +27,5 @@ Sudo can be requested, depends on the way how you installed npm in your machine.
 
 Yarn
 ```
-yarn global react-native-cli
+yarn global add react-native-cli
 ```
-
-Now let's run your first project.
-
-### Running
-
-```
-react-native init MyFirstProject
-cd MyFirstProject
-react-native run-ios
-```
-
-You should see your new app running in the iOS Simulator shortly.
